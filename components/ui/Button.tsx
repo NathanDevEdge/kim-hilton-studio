@@ -22,6 +22,7 @@ interface ButtonAsLink extends ButtonBaseProps {
   className?: string;
   target?: string;
   rel?: string;
+  onClick?: () => void;
 }
 
 type ButtonProps = ButtonAsButton | ButtonAsLink;
@@ -49,9 +50,9 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     const classes = `${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`;
 
     if ("href" in props && props.href) {
-      const { href, children, target, rel, ...rest } = props as ButtonAsLink;
+      const { href, children, target, rel, onClick, ...rest } = props as ButtonAsLink;
       return (
-        <Link href={href} className={classes} target={target} rel={rel}>
+        <Link href={href} className={classes} target={target} rel={rel} onClick={onClick}>
           {children}
         </Link>
       );

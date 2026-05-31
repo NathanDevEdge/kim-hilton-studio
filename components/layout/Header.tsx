@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Container } from "@/components/ui/Container";
+import { useCart } from "@/components/shop/CartProvider";
 
 const navLinks = [
   { label: "Work", href: "/work" },
@@ -35,6 +36,7 @@ export function Header() {
     return () => { document.body.style.overflow = ""; };
   }, [menuOpen]);
 
+  const { itemCount, openCart } = useCart();
   const isLight = isHome && !scrolled;
 
   return (
@@ -77,6 +79,30 @@ export function Header() {
                 );
               })}
             </nav>
+
+            {/* Cart icon */}
+            <button
+              onClick={openCart}
+              className={`hidden lg:flex items-center gap-2 transition-colors duration-500 ${
+                isLight ? "text-cornsilk" : "text-black-forest"
+              } hover:text-copperwood`}
+              aria-label="Open cart"
+            >
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path
+                  d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-1.5 3.5M17 13l1.5 3.5M9 17a1 1 0 100 2 1 1 0 000-2zm8 0a1 1 0 100 2 1 1 0 000-2z"
+                  stroke="currentColor"
+                  strokeWidth="1.2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+              {itemCount > 0 && (
+                <span className="font-body text-xs bg-copperwood text-cornsilk rounded-full w-4 h-4 flex items-center justify-center -ml-1">
+                  {itemCount}
+                </span>
+              )}
+            </button>
 
             {/* Mobile hamburger */}
             <button
