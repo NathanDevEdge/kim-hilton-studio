@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Text } from "@/components/ui/Text";
 
@@ -12,9 +13,10 @@ const services = [
     number: "01",
     label: "Photography",
     copy: "Imagery that speaks before words do.",
+    imageId: "SVC-01",
+    overlay: "rgba(17,26,10,0.35)",
     gradient:
       "linear-gradient(155deg, #111a0a 0%, #1e2b12 30%, #283618 55%, #606C38 100%)",
-    // Positioned: left side, vertically centred
     desktopClass: "left-[8%] top-1/2 -translate-y-1/2",
   },
   {
@@ -22,9 +24,10 @@ const services = [
     number: "02",
     label: "Marketing",
     copy: "Strategy that turns attention into loyalty.",
+    imageId: "SVC-02",
+    overlay: "rgba(30,20,5,0.38)",
     gradient:
       "linear-gradient(155deg, #1e2b12 0%, #4a2a0e 40%, #BC6C25 75%, #DDA15E 100%)",
-    // Positioned: right side, upper quarter
     desktopClass: "right-[9%] top-[18%]",
   },
   {
@@ -32,9 +35,10 @@ const services = [
     number: "03",
     label: "Design",
     copy: "Aesthetics built to outlast trends.",
+    imageId: "SVC-03",
+    overlay: "rgba(17,26,10,0.35)",
     gradient:
       "linear-gradient(155deg, #111a0a 0%, #283618 35%, #4a2a0e 70%, #BC6C25 100%)",
-    // Positioned: right side, lower quarter
     desktopClass: "right-[9%] bottom-[18%]",
   },
 ];
@@ -62,10 +66,22 @@ export function ServiceSection() {
           <motion.div
             key={service.id}
             className="absolute inset-0"
-            style={{ background: service.gradient }}
             animate={{ opacity: active === service.id ? 1 : 0 }}
             transition={{ duration: 0.7, ease: "easeInOut" }}
-          />
+          >
+            <Image
+              src={`/images/${service.imageId}.png`}
+              alt=""
+              fill
+              className="object-cover"
+              priority={service.id === "photography"}
+            />
+            {/* Colour overlay to maintain mood and text readability */}
+            <div
+              className="absolute inset-0"
+              style={{ background: service.overlay }}
+            />
+          </motion.div>
         ))}
 
         {/* Warm top-right accent that intensifies on marketing hover */}
@@ -155,20 +171,16 @@ export function ServiceSection() {
             key={service.id}
             className="relative h-72 flex items-end px-7 pb-8 overflow-hidden"
           >
+            <Image
+              src={`/images/${service.imageId}.png`}
+              alt=""
+              fill
+              className="object-cover"
+            />
             <div
               className="absolute inset-0"
-              style={{ background: service.gradient }}
+              style={{ background: service.overlay }}
             />
-            {/* Subtle warm glow on marketing card */}
-            {service.id === "marketing" && (
-              <div
-                className="absolute inset-0 pointer-events-none"
-                style={{
-                  background:
-                    "radial-gradient(ellipse 70% 50% at 80% 20%, rgba(221,161,94,0.2) 0%, transparent 65%)",
-                }}
-              />
-            )}
             <div className="relative z-10">
               <div className="flex items-center gap-2 mb-2">
                 <Text variant="label" className="text-cornsilk/35">
