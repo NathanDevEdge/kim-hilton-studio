@@ -80,13 +80,13 @@ export function Header() {
               })}
             </nav>
 
-            {/* Cart icon */}
+            {/* Cart icon — visible on all screen sizes */}
             <button
               onClick={openCart}
-              className={`hidden lg:flex items-center gap-2 transition-colors duration-500 ${
+              className={`flex items-center gap-2 transition-colors duration-500 ${
                 isLight ? "text-cornsilk" : "text-black-forest"
               } hover:text-copperwood`}
-              aria-label="Open cart"
+              aria-label={`Open cart${itemCount > 0 ? `, ${itemCount} item${itemCount > 1 ? "s" : ""}` : ""}`}
             >
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                 <path
