@@ -1,26 +1,71 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Colour palette */
+  --color-cornsilk: #FEFAE0;
+  --color-black-forest: #283618;
+  --color-olive-leaf: #606C38;
+  --color-sunlit-clay: #DDA15E;
+  --color-copperwood: #BC6C25;
+
+  /* Font families */
+  --font-heading: var(--font-cormorant);
+  --font-body: var(--font-dm-sans);
+
+  /* Custom spacing */
+  --spacing-section: 7rem;
+  --spacing-section-sm: 4rem;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Base */
+:root {
+  --background: #FEFAE0;
+  --foreground: #283618;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-dm-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Typography defaults */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+/* Selection colour */
+::selection {
+  background-color: #DDA15E;
+  color: #283618;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #FEFAE0;
+}
+::-webkit-scrollbar-thumb {
+  background: #606C38;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #BC6C25;
+}
+
+/* Focus ring */
+:focus-visible {
+  outline: 2px solid #BC6C25;
+  outline-offset: 3px;
 }
